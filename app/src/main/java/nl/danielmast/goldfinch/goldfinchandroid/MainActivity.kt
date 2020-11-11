@@ -1,10 +1,12 @@
 package nl.danielmast.goldfinch.goldfinchandroid
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import kotlinx.coroutines.*
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -22,41 +24,33 @@ val RETROFIT: Retrofit = Retrofit.Builder()
     .client(okHttpClient)
     .build()
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : FragmentActivity() {
+    private lateinit var tabLayout: TabLayout
+    protected lateinit var viewPager: ViewPager2
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        getUser("1")
-    }
+        viewPager = findViewById(R.id.pager)
+        viewPager.adapter = CollectionAdapter(this)
 
-    private fun getUser(userId: String) {
-        val service = RETROFIT.create(APIService::class.java)
-        val job = Job()
-        val uiScope = CoroutineScope(Dispatchers.Main + job)
-
-        uiScope.launch {
-            val response = service.getUser(userId)
-            withContext(Dispatchers.Main) {
-                if (response.isSuccessful) {
-                    findViewById<TextView>(R.id.user_name)?.apply {
-                        text = response.body()?.name
-                    }
-
-                    findViewById<TextView>(R.id.user_gender)?.apply {
-                        text = response.body()?.gender.toString()
-                    }
-
-                    findViewById<TextView>(R.id.user_orientation)?.apply {
-                        text = response.body()?.orientation.toString()
-                    }
-
-                    findViewById<TextView>(R.id.user_text)?.apply {
-                        text = response.body()?.text
-                    }
-                } else {
-                    Log.e("RETROFIT_ERROR", response.code().toString())
-                }
+        tabLayout = findViewById(R.id.tab_layout)
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = when(position) {
+                0 -> getString(R.string.tab_explore)
+                1 -> getString(R.string.tab_profile)
+                else -> TODO()
             }
-        }
+        }.attach()
+    }
+}
+
+class CollectionAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
+    override fun getItemCount(): Int = 2
+
+    override fun createFragment(position: Int): Fragment = when (position) {
+        0 -> ExploreFragment((2..5).random().toString())
+        1 -> UserFragment("1")
+        else -> TODO()
     }
 }

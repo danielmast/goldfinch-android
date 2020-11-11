@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Goldfinch</string>
+    <string name="tab_explore">Explore</string>
+    <string name="tab_profile">Profile</string>
 </resources>
