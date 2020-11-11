@@ -38,8 +38,20 @@ class MainActivity : AppCompatActivity() {
             val response = service.getUser(userId)
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
-                    findViewById<TextView>(R.id.user)?.apply {
-                        text = response.body()?.toString()
+                    findViewById<TextView>(R.id.user_name)?.apply {
+                        text = response.body()?.name
+                    }
+
+                    findViewById<TextView>(R.id.user_gender)?.apply {
+                        text = response.body()?.gender.toString()
+                    }
+
+                    findViewById<TextView>(R.id.user_orientation)?.apply {
+                        text = response.body()?.orientation.toString()
+                    }
+
+                    findViewById<TextView>(R.id.user_text)?.apply {
+                        text = response.body()?.text
                     }
                 } else {
                     Log.e("RETROFIT_ERROR", response.code().toString())
