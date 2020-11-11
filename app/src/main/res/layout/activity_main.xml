@@ -41,12 +41,14 @@
 
     <TextView
         android:id="@+id/user_text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"
         android:text="Text"
         android:textSize="30sp"
-        app:layout_constraintLeft_toLeftOf="@id/user_gender"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/user_gender" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
