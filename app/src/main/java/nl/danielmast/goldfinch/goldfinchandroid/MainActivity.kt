@@ -1,6 +1,8 @@
 package nl.danielmast.goldfinch.goldfinchandroid
 
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -19,7 +21,7 @@ private val okHttpClient = OkHttpClient.Builder()
     .build()
 
 val RETROFIT: Retrofit = Retrofit.Builder()
-    .baseUrl("http://<HOST>:8080/")
+    .baseUrl("http://192.168.1.61:8080/")
     .addConverterFactory(GsonConverterFactory.create())
     .client(okHttpClient)
     .build()
@@ -42,6 +44,11 @@ class MainActivity : FragmentActivity() {
                 else -> TODO()
             }
         }.attach()
+    }
+
+    fun review(view : View) {
+        val tag = view.tag.toString()
+        Log.i("MainActivity", "I $tag this person")
     }
 }
 
