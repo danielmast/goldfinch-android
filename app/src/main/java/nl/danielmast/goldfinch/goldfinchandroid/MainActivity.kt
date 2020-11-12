@@ -45,11 +45,6 @@ class MainActivity : FragmentActivity() {
             }
         }.attach()
     }
-
-    fun review(view : View) {
-        val tag = view.tag.toString()
-        Log.i("MainActivity", "I $tag this person")
-    }
 }
 
 class CollectionAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {

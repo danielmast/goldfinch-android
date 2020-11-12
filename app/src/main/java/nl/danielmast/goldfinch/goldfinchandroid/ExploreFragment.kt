@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import kotlinx.coroutines.*
@@ -21,8 +22,14 @@ class ExploreFragment(val userId: String): Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_explore, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_explore, container, false).apply {
+        findViewById<Button>(R.id.like_button).setOnClickListener {
+            Log.i("ExploreFragment", "I like this profile")
+        }
+
+        findViewById<Button>(R.id.dont_like_button).setOnClickListener {
+            Log.i("ExploreFragment", "I don't like this profile")
+        }
     }
 
     private fun loadUser(userId: String) {
