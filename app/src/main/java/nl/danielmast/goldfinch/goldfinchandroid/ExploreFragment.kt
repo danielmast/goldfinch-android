@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import kotlinx.coroutines.*
 
-class ExploreFragment(val userId: String): Fragment() {
+class ExploreFragment(val userId: Int): Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,24 +24,24 @@ class ExploreFragment(val userId: String): Fragment() {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_explore, container, false).apply {
         findViewById<Button>(R.id.like_button).setOnClickListener {
-            loadUser((2..5).random().toString())
+            loadUser((1..3).random())
         }
 
         findViewById<Button>(R.id.dont_like_button).setOnClickListener {
-            loadUser((2..5).random().toString())
+            loadUser((1..3).random())
         }
     }
 
-    private fun loadUser(userId: String) {
+    private fun loadUser(userId: Int) {
         val service = RETROFIT.create(APIService::class.java)
         val job = Job()
         val uiScope = CoroutineScope(Dispatchers.Main + job)
 
         uiScope.launch {
-            val response = service.getUser(userId)
+            val response = service.getUsers()
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
-                    val user = response.body()!!
+                    val user = response.body()!![userId]
                     view?.findViewById<TextView>(R.id.user_name)?.apply {
                         text = user.name
                     }

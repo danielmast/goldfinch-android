@@ -51,8 +51,8 @@ class CollectionAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragm
     override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment = when (position) {
-        0 -> ExploreFragment((2..5).random().toString())
-        1 -> UserFragment("1")
+        0 -> ExploreFragment((1..3).random())
+        1 -> UserFragment(0)
         else -> TODO()
     }
 }
