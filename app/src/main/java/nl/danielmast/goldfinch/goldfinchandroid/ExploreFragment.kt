@@ -24,11 +24,11 @@ class ExploreFragment(val userId: String): Fragment() {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_explore, container, false).apply {
         findViewById<Button>(R.id.like_button).setOnClickListener {
-            Log.i("ExploreFragment", "I like this profile")
+            loadUser((2..5).random().toString())
         }
 
         findViewById<Button>(R.id.dont_like_button).setOnClickListener {
-            Log.i("ExploreFragment", "I don't like this profile")
+            loadUser((2..5).random().toString())
         }
     }
 
