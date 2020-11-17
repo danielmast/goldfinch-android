@@ -4,4 +4,7 @@
     <string name="tab_profile">Profile</string>
     <string name="like_button">Like</string>
     <string name="dont_like_button">Don\'t like</string>
+    <string name="username_key">username</string>
+    <string name="edittext_username">username</string>
+    <string name="login_button">Login</string>
 </resources>
