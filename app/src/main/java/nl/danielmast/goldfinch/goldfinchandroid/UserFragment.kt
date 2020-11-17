@@ -7,14 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager
 import kotlinx.coroutines.*
 
-class UserFragment(val userId: Int): Fragment() {
+class UserFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        loadUser(userId)
+        loadUser()
     }
 
     override fun onCreateView(
@@ -25,16 +26,16 @@ class UserFragment(val userId: Int): Fragment() {
         return inflater.inflate(R.layout.fragment_user, container, false)
     }
 
-    private fun loadUser(userId: Int) {
+    private fun loadUser() {
         val service = RETROFIT.create(APIService::class.java)
         val job = Job()
         val uiScope = CoroutineScope(Dispatchers.Main + job)
 
         uiScope.launch {
-            val response = service.getUsers()
+            val response = service.getUserByUsername(getUsername()!!)
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
-                    val user = response.body()!![userId]
+                    val user = response.body()!!
                     view?.findViewById<TextView>(R.id.user_name)?.apply {
                         text = user.name
                     }
@@ -56,4 +57,7 @@ class UserFragment(val userId: Int): Fragment() {
             }
         }
     }
+
+    private fun getUsername(): String? = PreferenceManager.getDefaultSharedPreferences(activity)
+        .getString(getString(R.string.username_key), null)
 }

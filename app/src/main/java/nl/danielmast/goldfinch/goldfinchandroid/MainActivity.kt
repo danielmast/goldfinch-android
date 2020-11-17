@@ -50,7 +50,7 @@ class CollectionAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragm
 
     override fun createFragment(position: Int): Fragment = when (position) {
         0 -> ExploreFragment((1..3).random())
-        1 -> UserFragment(0)
+        1 -> UserFragment()
         else -> TODO()
     }
 }
