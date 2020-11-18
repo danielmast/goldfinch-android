@@ -7,4 +7,5 @@
     <string name="username_key">username</string>
     <string name="edittext_username">username</string>
     <string name="login_button">Login</string>
+    <string name="tab_matches">Matches</string>
 </resources>

@@ -38,7 +38,8 @@ class MainActivity : FragmentActivity() {
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = when(position) {
                 0 -> getString(R.string.tab_explore)
-                1 -> getString(R.string.tab_profile)
+                1 -> getString(R.string.tab_matches)
+                2 -> getString(R.string.tab_profile)
                 else -> TODO()
             }
         }.attach()
@@ -46,11 +47,12 @@ class MainActivity : FragmentActivity() {
 }
 
 class CollectionAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
-    override fun getItemCount(): Int = 2
+    override fun getItemCount(): Int = 3
 
     override fun createFragment(position: Int): Fragment = when (position) {
         0 -> ExploreFragment((1..3).random())
-        1 -> UserFragment()
+        1 -> MatchesFragment()
+        2 -> UserFragment()
         else -> TODO()
     }
 }
