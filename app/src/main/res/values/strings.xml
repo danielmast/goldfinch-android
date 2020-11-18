@@ -8,4 +8,8 @@
     <string name="edittext_username">username</string>
     <string name="login_button">Login</string>
     <string name="tab_matches">Matches</string>
+    <string name="user_name_placeholder">Name</string>
+    <string name="user_gender_placeholder">Gender</string>
+    <string name="user_orientation_placeholder">Orientation</string>
+    <string name="user_text_placeholder">Text</string>
 </resources>
