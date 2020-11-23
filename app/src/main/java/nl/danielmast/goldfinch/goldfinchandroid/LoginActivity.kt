@@ -20,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
                 putString(getString(R.string.username_key), username)
                 apply()
                 finish()
-                applicationContext.startActivity(Intent(applicationContext, MainActivity::class.java))
+                startActivity(Intent(applicationContext, MainActivity::class.java))
             }
         }
     }

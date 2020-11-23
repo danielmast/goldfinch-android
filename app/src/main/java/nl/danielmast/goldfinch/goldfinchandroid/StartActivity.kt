@@ -12,9 +12,9 @@ class StartActivity : AppCompatActivity() {
         finish()
 
         if (getUsername() == null) {
-            applicationContext.startActivity(Intent(applicationContext, LoginActivity::class.java))
+            startActivity(Intent(applicationContext, LoginActivity::class.java))
         } else {
-            applicationContext.startActivity(Intent(applicationContext, MainActivity::class.java))
+            startActivity(Intent(applicationContext, MainActivity::class.java))
         }
     }
 
