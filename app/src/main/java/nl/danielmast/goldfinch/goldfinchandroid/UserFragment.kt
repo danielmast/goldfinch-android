@@ -36,19 +36,19 @@ class UserFragment : Fragment() {
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
                     val user = response.body()!!
-                    view?.findViewById<TextView>(R.id.user_name)?.apply {
+                    view?.findViewById<TextView>(R.id.user_name_text)?.apply {
                         text = user.name
                     }
 
-                    view?.findViewById<TextView>(R.id.user_gender)?.apply {
+                    view?.findViewById<TextView>(R.id.user_gender_text)?.apply {
                         text = user.gender.toString()
                     }
 
-                    view?.findViewById<TextView>(R.id.user_orientation)?.apply {
+                    view?.findViewById<TextView>(R.id.user_orientation_text)?.apply {
                         text = user.orientation.toString()
                     }
 
-                    view?.findViewById<TextView>(R.id.user_text)?.apply {
+                    view?.findViewById<TextView>(R.id.user_text_text)?.apply {
                         text = user.text
                     }
                 } else {

@@ -16,7 +16,7 @@ class LoginActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.login_button).setOnClickListener {
             with(sharedPref.edit()) {
-                val username = findViewById<EditText>(R.id.edittext_username).text.toString()
+                val username = findViewById<EditText>(R.id.username_edittext).text.toString()
                 putString(getString(R.string.username_key), username)
                 apply()
                 finish()
