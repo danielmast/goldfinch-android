@@ -1,4 +1,4 @@
-package nl.danielmast.goldfinch.goldfinchandroid
+package nl.danielmast.goldfinch
 
 import org.junit.Test
 

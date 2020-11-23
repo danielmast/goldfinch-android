@@ -1,4 +1,4 @@
-package nl.danielmast.goldfinch.goldfinchandroid
+package nl.danielmast.goldfinch
 
 import android.os.Bundle
 import android.view.LayoutInflater

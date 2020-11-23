@@ -1,6 +1,6 @@
-package nl.danielmast.goldfinch.goldfinchandroid
+package nl.danielmast.goldfinch
 
-import nl.danielmast.goldfinch.goldfinchandroid.user.User
+import nl.danielmast.goldfinch.user.User
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

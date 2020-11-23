@@ -1,4 +1,4 @@
-package nl.danielmast.goldfinch.goldfinchandroid.user
+package nl.danielmast.goldfinch.user
 
 data class User(val id: Long, var name: String, var gender: Gender, var orientation: Orientation, var text: String)
 
