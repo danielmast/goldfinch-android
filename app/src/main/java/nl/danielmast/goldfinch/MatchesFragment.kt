@@ -10,17 +10,13 @@ import androidx.fragment.app.Fragment
 
 class MatchesFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_matches, container, false).apply {
         val myStringArray = arrayOf("John", "Mary", "Leo")
-        val adapter = ArrayAdapter(activity!!.applicationContext, android.R.layout.simple_list_item_1, myStringArray)
+        val adapter = ArrayAdapter(context, android.R.layout.simple_list_item_1, myStringArray)
 
         val listView: ListView = findViewById(R.id.matches_listview)
         listView.adapter = adapter
