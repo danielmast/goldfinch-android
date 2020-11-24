@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import nl.danielmast.goldfinch.databinding.FragmentMainBinding
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -27,15 +26,21 @@ val RETROFIT: Retrofit = Retrofit.Builder()
     .build()
 
 class MainFragment : Fragment() {
-    private lateinit var tabLayout: TabLayout
-    private lateinit var viewPager: ViewPager2
+    private lateinit var binding: FragmentMainBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentMainBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewPager = view.findViewById(R.id.pager)
-        viewPager.adapter = CollectionAdapter(this@MainFragment)
+        binding.pager.adapter = CollectionAdapter(this@MainFragment)
 
-        tabLayout = view.findViewById(R.id.tab_layout)
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+        TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
             tab.text = when(position) {
                 0 -> getString(R.string.tab_explore)
                 1 -> getString(R.string.tab_matches)
@@ -44,12 +49,6 @@ class MainFragment : Fragment() {
             }
         }.attach()
     }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_main, container, false)
 }
 
 class CollectionAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {

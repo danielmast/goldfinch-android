@@ -5,12 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import kotlinx.coroutines.*
+import nl.danielmast.goldfinch.databinding.FragmentUserBinding
 
 class UserFragment : Fragment() {
+
+    private lateinit var binding: FragmentUserBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,8 +24,9 @@ class UserFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_user, container, false)
+    ): View {
+        binding = FragmentUserBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     private fun loadUser() {
@@ -36,19 +39,19 @@ class UserFragment : Fragment() {
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
                     val user = response.body()!!
-                    view?.findViewById<TextView>(R.id.user_name_text)?.apply {
+                    binding.userNameText.apply {
                         text = user.name
                     }
 
-                    view?.findViewById<TextView>(R.id.user_gender_text)?.apply {
+                    binding.userGenderText.apply {
                         text = user.gender.toString()
                     }
 
-                    view?.findViewById<TextView>(R.id.user_orientation_text)?.apply {
+                    binding.userOrientationText.apply {
                         text = user.orientation.toString()
                     }
 
-                    view?.findViewById<TextView>(R.id.user_text_text)?.apply {
+                    binding.userTextText.apply {
                         text = user.text
                     }
                 } else {

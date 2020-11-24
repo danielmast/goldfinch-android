@@ -5,12 +5,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import kotlinx.coroutines.*
+import nl.danielmast.goldfinch.databinding.FragmentExploreBinding
 
 class ExploreFragment(val userId: Int): Fragment() {
+
+    private lateinit var binding: FragmentExploreBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,13 +23,17 @@ class ExploreFragment(val userId: Int): Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_explore, container, false).apply {
-        findViewById<Button>(R.id.like_button).setOnClickListener {
-            loadUser((1..3).random())
-        }
+    ): View {
+        binding = FragmentExploreBinding.inflate(inflater, container, false)
+        return binding.root.apply {
 
-        findViewById<Button>(R.id.dont_like_button).setOnClickListener {
-            loadUser((1..3).random())
+            binding.likeButton.setOnClickListener {
+                loadUser((1..3).random())
+            }
+
+            binding.dontLikeButton.setOnClickListener {
+                loadUser((1..3).random())
+            }
         }
     }
 
@@ -42,19 +47,19 @@ class ExploreFragment(val userId: Int): Fragment() {
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
                     val user = response.body()!![userId]
-                    view?.findViewById<TextView>(R.id.user_name_text)?.apply {
+                    binding.userNameText.apply {
                         text = user.name
                     }
 
-                    view?.findViewById<TextView>(R.id.user_gender_text)?.apply {
+                    binding.userGenderText.apply {
                         text = user.gender.toString()
                     }
 
-                    view?.findViewById<TextView>(R.id.user_orientation_text)?.apply {
+                    binding.userOrientationText.apply {
                         text = user.orientation.toString()
                     }
 
-                    view?.findViewById<TextView>(R.id.user_text_text)?.apply {
+                    binding.userTextText.apply {
                         text = user.text
                     }
                 } else {
